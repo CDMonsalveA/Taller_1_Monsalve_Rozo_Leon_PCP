@@ -1,6 +1,6 @@
 from math import exp
 class SingleMachine:
-    def __init__(self, n = 1 , p = [], d = [], r = [], start=0):
+    def __init__(self, n = 1 , p = [], d = [], r = []):
         """
         n: number of jobs
         #M: number of machines
@@ -32,7 +32,7 @@ class SingleMachine:
             self.L[j] = self.C[j] - self.d[j]
             self.T[j] = max(0, self.L[j])
             self.E[j] = max(0, -self.L[j])
-            print(self.J[j],": ",self.r[j], self.C[j-1],"->", self.S[j],"-", self.C[j], "=", self.p[j])
+#            print(self.J[j],": ",self.r[j], self.C[j-1],"->", self.S[j],"-", self.C[j], "=", self.p[j])
     def FCFS(self):
         self.J = sorted(self.J)
         self.process()
