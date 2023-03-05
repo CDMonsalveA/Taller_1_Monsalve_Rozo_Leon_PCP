@@ -1,7 +1,8 @@
 from math import exp
 class SingleMachine:
     def __init__(self, n = 1 , p = [], d = [], r = [], start=0):
-        """n: number of jobs
+        """
+        n: number of jobs
         #M: number of machines
         #J: number of jobs
         #p: processing time
