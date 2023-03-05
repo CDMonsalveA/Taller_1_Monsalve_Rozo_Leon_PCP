@@ -25,6 +25,7 @@ class SingleMachine:
         self.L = [0]*self.n
         self.T = [0]*self.n
         self.E = [0]*self.n
+        self.W = [1]*self.n
     def process(self):
         for j in range(self.n):
             self.S[j] = max(self.r[j], self.C[j-1])
@@ -70,6 +71,22 @@ class SingleMachine:
             self.J = [x for _, x in sorted(zip(zip(self.r, [-k for k in self.p]), self.J))]
             self.d = [x for _, x in sorted(zip(zip(self.r, [-k for k in self.p]), self.d))]
             self.p = [x for _, x in sorted(zip(zip(self.r, [-k for k in self.p]), self.p))]
+            self.r = sorted(self.r)
+        self.process()
+        return self.J
+    def WSPT(self):
+        rs = [self.p/self.W for self.p, self.W in zip(self.p, self.W)]
+        if self.r == [] or len(set(self.r)) == 1:
+            self.J = [self.J for _, self.J in sorted(zip(rs, self.J))]
+            self.d = [self.d for _, self.d in sorted(zip(rs, self.d))]
+            self.p = sorted(rs)
+            self.process()
+            return self.J
+        else:
+            #Sort the jobs by release date and processing time
+            self.J = [x for _, x in sorted(zip(zip(self.r, rs), self.J))]
+            self.d = [x for _, x in sorted(zip(zip(self.r, rs), self.d))]
+            self.p = [x for _, x in sorted(zip(zip(self.r, rs), self.p))]
             self.r = sorted(self.r)
         self.process()
         return self.J
